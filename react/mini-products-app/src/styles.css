@@ -1,0 +1,151 @@
+:root {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #1f2937;
+  background-color: #f3f5f9;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(180deg, #f3f5f9 0%, #ecf0f7 100%);
+}
+
+.container {
+  width: min(1000px, 92%);
+  margin: 0 auto;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  z-index: 10;
+}
+
+.header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 0;
+}
+
+.logo {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.nav-links {
+  display: flex;
+  gap: 14px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #4b5563;
+  font-weight: 600;
+  padding-bottom: 3px;
+  border-bottom: 2px solid transparent;
+}
+
+.nav-links a.active {
+  color: #0f172a;
+  border-color: #2563eb;
+}
+
+.main-content {
+  padding: 28px 0 36px;
+}
+
+h2 {
+  margin: 0 0 8px;
+}
+
+p {
+  margin: 0 0 14px;
+  color: #374151;
+}
+
+.section-text {
+  margin-bottom: 18px;
+}
+
+.search-label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 420px;
+  padding: 10px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  font-size: 1rem;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 16px;
+}
+
+.product-card {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+}
+
+.product-card h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.02rem;
+}
+
+.product-price,
+.product-category {
+  margin-bottom: 8px;
+}
+
+.details-button {
+  border: none;
+  border-radius: 10px;
+  background-color: #2563eb;
+  color: white;
+  padding: 8px 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.details-button:hover {
+  background-color: #1d4ed8;
+}
+
+.empty-text {
+  background-color: #fff7ed;
+  border: 1px solid #fed7aa;
+  color: #9a3412;
+  padding: 10px 12px;
+  border-radius: 10px;
+  max-width: 420px;
+}
+
+@media (max-width: 640px) {
+  .header-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-links {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
