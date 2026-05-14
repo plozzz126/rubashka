@@ -18,24 +18,28 @@ function ProductsPage() {
   }, [search]);
 
   return (
-    <section>
-      <h2>Товары</h2>
-      <p className="section-text">Ниже список товаров. Можно искать по названию.</p>
+    <section className="products-page">
+      <div className="products-head">
+        <h2>Товары</h2>
+        <span className="count-badge">Найдено: {filteredProducts.length}</span>
+      </div>
+
+      <p className="section-text">Введите название товара, чтобы быстро отфильтровать список.</p>
 
       <label htmlFor="search" className="search-label">
-        Поиск товара
+        Поиск по названию
       </label>
       <input
         id="search"
         type="text"
-        placeholder="Например: ноутбук"
+        placeholder="Например: Samsung"
         value={search}
         onChange={(event) => setSearch(event.target.value)}
         className="search-input"
       />
 
       {filteredProducts.length === 0 ? (
-        <p className="empty-text">По вашему запросу ничего не найдено.</p>
+        <p className="empty-text">По этому запросу ничего не найдено.</p>
       ) : (
         <div className="products-grid">
           {filteredProducts.map((product) => (

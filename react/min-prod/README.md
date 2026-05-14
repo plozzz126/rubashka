@@ -1,4 +1,4 @@
-# Mini Products App
+# krut-prod
 
 Небольшое React-приложение с товарами.
 
