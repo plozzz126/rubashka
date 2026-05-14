@@ -1,0 +1,54 @@
+1) Какие таблицы выделены
+- clients
+- cars
+- car_categories
+- bookings
+- payments
+- car_inspections
+- branches
+- employees
+
+2) Что здесь PK/FK
+- Во всех таблицах есть свой PK: *_id
+- FK связи:
+  cars.category_id -> car_categories.category_id
+  cars.branch_id -> branches.branch_id
+  employees.branch_id -> branches.branch_id
+  bookings.client_id -> clients.client_id
+  bookings.car_id -> cars.car_id
+  bookings.pickup_branch_id -> branches.branch_id
+  bookings.return_branch_id -> branches.branch_id
+  bookings.created_by_employee_id -> employees.employee_id
+  payments.booking_id -> bookings.booking_id
+  payments.processed_by_employee_id -> employees.employee_id
+  car_inspections.car_id -> cars.car_id
+  car_inspections.booking_id -> bookings.booking_id
+  car_inspections.employee_id -> employees.employee_id
+
+3) Объяснение связей
+- Одна категория имеет много машин: car_categories 1 -> N cars.
+- Один клиент может сделать много бронирований: clients 1 -> N bookings.
+- Одна машина может иметь много бронирований в разные даты: cars 1 -> N bookings.
+- Одна бронь может иметь одну или несколько оплат: bookings 1 -> N payments.
+  Это нужно для частичной оплаты (предоплата + доплата при возврате).
+- Одна машина имеет много проверок состояния: cars 1 -> N car_inspections.
+
+4) Рекомендуемые индексы
+- cars.category_id
+- bookings.client_id
+- bookings.car_id
+- bookings.start_date
+- payments.booking_id
+
+Почему эти индексы:
+- Они ускоряют типичные запросы: поиск машин по категории,
+  история клиента, загрузка броней по машине/дате и вывод оплат по брони.
+
+5) Что можно хранить в MongoDB/NoSQL
+- Фото осмотра авто (много файлов, разный размер метаданных).
+- Логи состояния авто и история изменений статусов.
+- История действий менеджеров (audit log).
+- GPS/телеметрия авто (потоковые и полуструктурированные данные).
+
+6) Минимальный текст для защиты (готовый)
+Я выделил эти таблицы, потому что каждая отвечает за отдельную сущность бизнеса: клиенты, машины, брони, оплаты и проверки состояния. Primary Key нужен для уникальной идентификации каждой записи. Foreign Key нужен для связи таблиц между собой и целостности данных. Связи one-to-many покрывают основной процесс аренды: категория -> машины, клиент -> брони, машина -> брони, бронь -> оплаты, машина -> проверки. Индексы поставил на поля, по которым чаще всего будет поиск, фильтрация и JOIN. MongoDB предлагаю использовать для гибких и часто меняющихся данных: фото осмотров, логи, телеметрия и история действий сотрудников.

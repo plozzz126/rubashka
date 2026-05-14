@@ -1,0 +1,107 @@
+erDiagram
+    CAR_CATEGORIES ||--o{ CARS : has
+    BRANCHES ||--o{ CARS : stores
+    BRANCHES ||--o{ EMPLOYEES : employs
+
+    CLIENTS ||--o{ BOOKINGS : makes
+    CARS ||--o{ BOOKINGS : booked_for
+    BRANCHES ||--o{ BOOKINGS : pickup_at
+    BRANCHES ||--o{ BOOKINGS : return_to
+    EMPLOYEES ||--o{ BOOKINGS : creates
+
+    BOOKINGS ||--|{ PAYMENTS : has
+
+    CARS ||--o{ CAR_INSPECTIONS : has
+    EMPLOYEES ||--o{ CAR_INSPECTIONS : performs
+    BOOKINGS ||--o{ CAR_INSPECTIONS : related_to
+
+    CLIENTS {
+        bigint client_id PK
+        string first_name
+        string last_name
+        string phone UK
+        string email UK
+        string driver_license_no UK
+        date license_expiry_date
+        datetime created_at
+    }
+
+    CAR_CATEGORIES {
+        bigint category_id PK
+        string name UK
+        string description
+        decimal daily_rate
+    }
+
+    BRANCHES {
+        bigint branch_id PK
+        string name
+        string city
+        string address_line
+        string phone
+        datetime created_at
+    }
+
+    EMPLOYEES {
+        bigint employee_id PK
+        bigint branch_id FK
+        string first_name
+        string last_name
+        string role
+        string phone UK
+        string email UK
+        boolean is_active
+        date hired_at
+    }
+
+    CARS {
+        bigint car_id PK
+        bigint category_id FK
+        bigint branch_id FK
+        string plate_number UK
+        string brand
+        string model
+        smallint production_year
+        string vin UK
+        string status
+        decimal daily_price
+        int mileage_km
+    }
+
+    BOOKINGS {
+        bigint booking_id PK
+        bigint client_id FK
+        bigint car_id FK
+        bigint pickup_branch_id FK
+        bigint return_branch_id FK
+        bigint created_by_employee_id FK
+        datetime start_date
+        datetime end_date
+        decimal total_amount
+        string status
+        datetime created_at
+    }
+
+    PAYMENTS {
+        bigint payment_id PK
+        bigint booking_id FK
+        bigint processed_by_employee_id FK
+        decimal amount
+        string payment_method
+        string payment_status
+        string transaction_ref
+        datetime paid_at
+    }
+
+    CAR_INSPECTIONS {
+        bigint inspection_id PK
+        bigint car_id FK
+        bigint booking_id FK
+        bigint employee_id FK
+        string inspection_type
+        smallint fuel_level_percent
+        int mileage_km
+        string condition_status
+        string damage_notes
+        datetime inspected_at
+    }
